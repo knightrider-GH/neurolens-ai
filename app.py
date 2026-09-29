@@ -129,7 +129,7 @@ async def read_upload_image(file: UploadFile) -> np.ndarray:
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
     """Serve the main application UI."""
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse(request, "index.html")
 
 
 # ─── Routes: System ────────────────────────────────────────────────────────────
@@ -476,5 +476,17 @@ if __name__ == "__main__":
         host=config.HOST,
         port=config.PORT,
         reload=config.DEBUG,
+        reload_excludes=[
+            "model_weights/*",
+            "uploads/*",
+            "outputs/*",
+            "*.onnx",
+            "*.pt",
+            "*.pth",
+            "*.tmp",
+            "*.jpg",
+            "*.png",
+            "*.webp",
+        ],
         log_level="info",
     )

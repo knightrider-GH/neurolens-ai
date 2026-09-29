@@ -94,11 +94,30 @@ class ModelDownloader:
             return target_path
 
         except requests.RequestException as e:
-            logger.error(f"❌ Download failed for {model_info['name']}: {e}")
+            logger.warning(f"Direct download failed for {model_info['name']}: {e}")
             # Cleanup temp file
             tmp_path = target_path.with_suffix(".tmp")
             if tmp_path.exists():
                 tmp_path.unlink()
+
+            # Fallback for YOLOv8 via ultralytics export
+            if model_key == "yolov8n":
+                try:
+                    logger.info("Attempting export via ultralytics...")
+                    from ultralytics import YOLO
+                    import shutil
+
+                    model = YOLO("yolov8n.pt")
+                    exported = model.export(format="onnx", imgsz=640)
+                    shutil.move(exported, target_path)
+                    pt_file = Path("yolov8n.pt")
+                    if pt_file.exists():
+                        pt_file.unlink()
+                    logger.info(f"✅ Generated {model_info['name']} via ultralytics export")
+                    return target_path
+                except Exception as ex:
+                    logger.error(f"❌ Ultralytics export also failed: {ex}")
+
             return None
         except Exception as e:
             logger.error(f"❌ Unexpected error downloading {model_info['name']}: {e}")

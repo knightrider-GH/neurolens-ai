@@ -38,7 +38,7 @@ MODELS = {
     "real_esrgan_x4": {
         "name": "Real-ESRGAN x4",
         "filename": "realesrgan_x4.onnx",
-        "url": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth",
+        "url": "https://github.com/TechFlipsi/FlipsiColor-Models/releases/download/v0.2/RealESRGAN.onnx",
         "input_size": None,
         "description": "4× AI image super-resolution",
         "task": "enhancement",
