@@ -87,7 +87,7 @@ The platform combines four powerful AI capabilities into a single, beautifully d
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/YOUR_USERNAME/neurolens-ai.git
+git clone https://github.com/knightrider-GH/neurolens-ai.git
 cd neurolens-ai
 
 # 2. Run the automated setup (Windows)
