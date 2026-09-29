@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NeuroLens AI — On-Device Visual Intelligence for Snapdragon</title>
+  <meta name="description" content="NeuroLens AI is an on-device visual intelligence and accessibility platform optimized for Snapdragon-powered HP PCs. Real-time object detection, image enhancement, OCR, and scene narration — all powered by Snapdragon NPU." />
+  <meta name="keywords" content="NeuroLens AI, Snapdragon, NPU, Qualcomm, on-device AI, visual intelligence, accessibility, object detection, OCR, image enhancement" />
+  <meta name="author" content="NeuroLens Team" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/static/css/style.css" />
+
+  <!-- Favicon (inline SVG) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════════
+       Navigation Bar
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-brand">
+      <div class="navbar-logo">N</div>
+      <div>
+        <div class="navbar-title">NeuroLens AI</div>
+        <div class="navbar-subtitle">Snapdragon Visual Intelligence</div>
+      </div>
+    </div>
+    <div class="navbar-status">
+      <div class="status-badge">
+        <span class="status-dot loading" id="status-dot"></span>
+        <span id="status-text">Connecting...</span>
+      </div>
+      <div class="status-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        <span id="provider-text">Detecting...</span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="app-container">
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         Hero Section
+         ═══════════════════════════════════════════════════════════════════ -->
+    <section class="hero" id="hero">
+      <div class="hero-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        Powered by Snapdragon NPU
+      </div>
+      <h1>
+        See the World Through<br/>
+        <span class="gradient-text">Intelligent Vision</span>
+      </h1>
+      <p class="hero-description">
+        On-device visual intelligence & accessibility platform. Real-time object detection,
+        AI image enhancement, document OCR — all running locally on your Snapdragon-powered PC.
+        No cloud. Full privacy. Blazing speed.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-primary btn-lg" onclick="switchTab('detect');document.getElementById('panel-detect').scrollIntoView({behavior:'smooth'})">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Start Detecting
+        </button>
+        <button class="btn btn-secondary btn-lg" onclick="switchTab('setup');document.getElementById('panel-setup').scrollIntoView({behavior:'smooth'})">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6m11-7h-6m-6 0H1m16.07-5.07-4.24 4.24m-1.66-1.66-4.24 4.24m12.02 0-4.24-4.24m-1.66 1.66-4.24-4.24"/></svg>
+          Setup Models
+        </button>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         Feature Highlights
+         ═══════════════════════════════════════════════════════════════════ -->
+    <div class="highlights-grid stagger-children">
+      <div class="highlight-card">
+        <div class="highlight-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+        </div>
+        <h3>Real-Time Detection</h3>
+        <p>YOLOv8-powered object detection running at full speed on Snapdragon NPU. Detect 80+ object categories in real-time from webcam or images.</p>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <h3>Scene Narration</h3>
+        <p>AI-powered accessibility feature that describes visual scenes in natural language. Built-in text-to-speech for visually impaired users.</p>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13.8 12H3"/></svg>
+        </div>
+        <h3>Image Enhancement</h3>
+        <p>4× AI super-resolution with Real-ESRGAN and intelligent background removal using U²-Net. Transform your images with NPU acceleration.</p>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <h3>Smart Document OCR</h3>
+        <p>Extract text from images with intelligent entity recognition. Automatically detects emails, dates, amounts, and document types.</p>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         Tab Navigation
+         ═══════════════════════════════════════════════════════════════════ -->
+    <div class="tabs-container">
+      <div class="tabs-nav" id="tabs-nav">
+        <button class="tab-btn active" data-tab="detect">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <span class="tab-text">Detection</span>
+        </button>
+        <button class="tab-btn" data-tab="enhance">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+          <span class="tab-text">Enhancement</span>
+        </button>
+        <button class="tab-btn" data-tab="ocr">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <span class="tab-text">OCR</span>
+        </button>
+        <button class="tab-btn" data-tab="benchmark">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          <span class="tab-text">Benchmark</span>
+        </button>
+        <button class="tab-btn" data-tab="setup">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          <span class="tab-text">Setup</span>
+        </button>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════════════════
+           Panel: Object Detection
+           ═════════════════════════════════════════════════════════════ -->
+      <div class="tab-panel active" id="panel-detect">
+        <!-- Stats Row -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value" id="stat-detect-count">0</div>
+            <div class="stat-label">Objects Found</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-detect-time">—</div>
+            <div class="stat-label">Inference Time</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-detect-fps">—</div>
+            <div class="stat-label">FPS</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-detect-provider">—</div>
+            <div class="stat-label">Provider</div>
+          </div>
+        </div>
+
+        <div class="feature-grid">
+          <!-- Left: Input (webcam or upload) -->
+          <div class="card">
+            <div class="card-header">
+              <h3>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                Visual Input
+              </h3>
+              <div style="display:flex;gap:8px;">
+                <button class="btn btn-sm btn-primary" id="webcam-start-btn" onclick="startWebcam()">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                  Live
+                </button>
+                <button class="btn btn-sm btn-secondary hidden" id="webcam-stop-btn" onclick="stopWebcam()">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                  Stop
+                </button>
+              </div>
+            </div>
+            <div class="card-body" style="padding:0;">
+              <!-- Webcam -->
+              <div class="webcam-container" id="webcam-container">
+                <div class="webcam-overlay">
+                  <span class="live-badge hidden" id="live-badge">LIVE</span>
+                  <span class="fps-counter hidden" id="webcam-fps">0 FPS</span>
+                </div>
+                <video id="webcam-video" class="hidden" autoplay muted playsinline></video>
+                <img id="webcam-result" class="hidden" alt="Detection result" />
+                <div class="webcam-placeholder" id="webcam-placeholder">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                  <span>Click "Live" for webcam detection</span>
+                </div>
+              </div>
+
+              <!-- Upload fallback -->
+              <div style="padding:16px;">
+                <div class="upload-zone" id="detect-upload-zone">
+                  <input type="file" id="detect-file-input" accept="image/*" class="hidden" />
+                  <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                  <div class="upload-text">
+                    <strong>Drop an image</strong> or click to browse
+                  </div>
+                  <div class="upload-hint">Supports JPG, PNG, WebP — Max 20 MB</div>
+                </div>
+              </div>
+
+              <!-- Loading overlay -->
+              <div class="loading-overlay hidden" id="detect-loading">
+                <div class="spinner spinner-lg"></div>
+                <span class="loading-text">Running AI detection on Snapdragon NPU...</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Results -->
+          <div style="display:flex;flex-direction:column;gap:16px;">
+            <!-- Result image -->
+            <div class="card">
+              <div class="card-header">
+                <h3>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+                  Detection Results
+                </h3>
+                <button class="btn-icon" onclick="downloadResult('detect-result-image')" title="Download">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </button>
+              </div>
+              <div class="card-body" style="padding:0;">
+                <div class="result-image-container" id="detect-result-image">
+                  <div class="result-image-placeholder">Upload an image or start webcam</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Detection list -->
+            <div class="results-panel">
+              <div class="results-header">
+                <h4>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                  Detected Objects
+                </h4>
+              </div>
+              <div class="results-body" id="detection-list">
+                <div class="empty-state">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                  <h4>No Detections Yet</h4>
+                  <p>Upload an image or enable webcam to start detecting objects.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Narration -->
+            <div class="narration-box">
+              <h5>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                Scene Narration (Accessibility)
+              </h5>
+              <p class="narration-text" id="narration-text">Narration will appear here after detection...</p>
+              <button class="btn btn-sm btn-secondary mt-1" onclick="speakNarration()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                Speak Aloud
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════════════════
+           Panel: Image Enhancement
+           ═════════════════════════════════════════════════════════════ -->
+      <div class="tab-panel" id="panel-enhance">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value" id="stat-enhance-time">—</div>
+            <div class="stat-label">Processing Time</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-enhance-original-size">—</div>
+            <div class="stat-label">Original Size</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-enhance-new-size">—</div>
+            <div class="stat-label">Enhanced Size</div>
+          </div>
+        </div>
+
+        <div class="feature-grid">
+          <!-- Left: Upload + Controls -->
+          <div class="card">
+            <div class="card-header">
+              <h3>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                Upload Image
+              </h3>
+            </div>
+            <div class="card-body">
+              <div class="upload-zone" id="enhance-upload-zone">
+                <input type="file" id="enhance-file-input" accept="image/*" class="hidden" />
+                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <div class="upload-text"><strong>Drop an image</strong> or click to browse</div>
+                <div class="upload-hint">Upload an image to enhance with AI</div>
+              </div>
+
+              <div class="result-image-container mt-2" id="enhance-original-image">
+                <div class="result-image-placeholder">Original image preview</div>
+              </div>
+
+              <div style="display:flex;gap:8px;margin-top:16px;">
+                <button class="btn btn-primary w-full" onclick="runUpscale()">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+                  Upscale 4×
+                </button>
+                <button class="btn btn-secondary w-full" onclick="runRemoveBg()">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+                  Remove BG
+                </button>
+              </div>
+
+              <!-- Loading overlay -->
+              <div class="loading-overlay hidden" id="enhance-loading">
+                <div class="spinner spinner-lg"></div>
+                <span class="loading-text">AI enhancement in progress...</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Result -->
+          <div class="card">
+            <div class="card-header">
+              <h3>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 12h18"/></svg>
+                Enhanced Result
+              </h3>
+              <button class="btn-icon" onclick="downloadResult('enhance-result-image')" title="Download">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </button>
+            </div>
+            <div class="card-body" style="padding:0;">
+              <div class="result-image-container" id="enhance-result-image">
+                <div class="result-image-placeholder">Enhanced image will appear here</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════════════════
+           Panel: OCR
+           ═════════════════════════════════════════════════════════════ -->
+      <div class="tab-panel" id="panel-ocr">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value" id="stat-ocr-blocks">0</div>
+            <div class="stat-label">Text Blocks</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-ocr-words">0</div>
+            <div class="stat-label">Words Found</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-ocr-confidence">—</div>
+            <div class="stat-label">Avg Confidence</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-ocr-time">—</div>
+            <div class="stat-label">Processing Time</div>
+          </div>
+        </div>
+
+        <div class="feature-grid">
+          <!-- Left: Upload -->
+          <div class="card">
+            <div class="card-header">
+              <h3>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Document Input
+              </h3>
+            </div>
+            <div class="card-body">
+              <div class="upload-zone" id="ocr-upload-zone">
+                <input type="file" id="ocr-file-input" accept="image/*" class="hidden" />
+                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                <div class="upload-text"><strong>Drop a document image</strong> or click to browse</div>
+                <div class="upload-hint">Upload a photo of a document, receipt, or handwritten notes</div>
+              </div>
+
+              <div class="result-image-container mt-2" id="ocr-result-image">
+                <div class="result-image-placeholder">OCR annotated image will appear here</div>
+              </div>
+
+              <!-- Loading overlay -->
+              <div class="loading-overlay hidden" id="ocr-loading">
+                <div class="spinner spinner-lg"></div>
+                <span class="loading-text">Extracting text with AI OCR...</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Results -->
+          <div style="display:flex;flex-direction:column;gap:16px;">
+            <div class="card">
+              <div class="card-header">
+                <h3>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="17" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="17" y1="18" x2="3" y2="18"/></svg>
+                  Extracted Text
+                </h3>
+                <button class="btn btn-sm btn-secondary" onclick="copyText('ocr-text-output')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  Copy
+                </button>
+              </div>
+              <div class="card-body">
+                <div class="ocr-text-output" id="ocr-text-output">Extracted text will appear here...</div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                  Document Analysis
+                </h3>
+              </div>
+              <div class="card-body">
+                <div class="ocr-analysis" id="ocr-analysis">
+                  <p class="text-muted">Analysis results will appear after OCR processing.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════════════════
+           Panel: Benchmark
+           ═════════════════════════════════════════════════════════════ -->
+      <div class="tab-panel" id="panel-benchmark">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value" id="stat-bench-provider">—</div>
+            <div class="stat-label">Provider</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-bench-avg">—</div>
+            <div class="stat-label">Avg Latency</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-bench-fps">—</div>
+            <div class="stat-label">FPS</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-bench-p95">—</div>
+            <div class="stat-label">P95 Latency</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-bench-min">—</div>
+            <div class="stat-label">Min Latency</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-bench-max">—</div>
+            <div class="stat-label">Max Latency</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-bench-iterations">—</div>
+            <div class="stat-label">Iterations</div>
+          </div>
+        </div>
+
+        <div class="feature-grid">
+          <div class="card">
+            <div class="card-header">
+              <h3>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                NPU vs CPU Performance
+              </h3>
+            </div>
+            <div class="card-body">
+              <div class="benchmark-chart">
+                <div class="benchmark-bar-group">
+                  <div class="benchmark-bar">
+                    <span class="bar-value" id="bench-npu-value">—</span>
+                    <div class="bar-fill npu" id="bench-bar-npu" style="height:40px;"></div>
+                    <span class="bar-label">NPU / Active</span>
+                  </div>
+                  <div class="benchmark-bar">
+                    <span class="bar-value" id="bench-cpu-value">—</span>
+                    <div class="bar-fill cpu" id="bench-bar-cpu" style="height:40px;"></div>
+                    <span class="bar-label">CPU Baseline</span>
+                  </div>
+                </div>
+              </div>
+
+              <div style="text-align:center;">
+                <button class="btn btn-primary btn-lg" onclick="runBenchmark()" id="benchmark-run-btn">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  Run Benchmark (YOLOv8)
+                </button>
+                <p class="text-muted mt-1" style="font-size:13px;">Runs 50 inference iterations with 5 warmup rounds</p>
+              </div>
+
+              <!-- Loading overlay -->
+              <div class="loading-overlay hidden" id="benchmark-loading">
+                <div class="spinner spinner-lg"></div>
+                <span class="loading-text">Running performance benchmark...</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+                Hardware Information
+              </h3>
+            </div>
+            <div class="card-body">
+              <div class="empty-state" style="padding:24px;">
+                <p>Hardware details are loaded from the system status API. Check the status badge in the navbar for real-time hardware detection info.</p>
+              </div>
+              <div style="padding:0 4px;">
+                <div class="analysis-item">
+                  <span style="font-size:18px;">🖥️</span>
+                  <div>
+                    <div class="label">Platform</div>
+                    <div class="value">Snapdragon X Elite / X Plus</div>
+                  </div>
+                </div>
+                <div class="analysis-item mt-1">
+                  <span style="font-size:18px;">⚡</span>
+                  <div>
+                    <div class="label">AI Accelerator</div>
+                    <div class="value">Qualcomm Hexagon NPU (45 TOPS)</div>
+                  </div>
+                </div>
+                <div class="analysis-item mt-1">
+                  <span style="font-size:18px;">🧮</span>
+                  <div>
+                    <div class="label">Runtime</div>
+                    <div class="value">ONNX Runtime + QNN Execution Provider</div>
+                  </div>
+                </div>
+                <div class="analysis-item mt-1">
+                  <span style="font-size:18px;">🎯</span>
+                  <div>
+                    <div class="label">Precision</div>
+                    <div class="value">FP16 (NPU-optimized)</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════════════════
+           Panel: Setup
+           ═════════════════════════════════════════════════════════════ -->
+      <div class="tab-panel" id="panel-setup">
+        <div class="feature-grid">
+          <div class="card">
+            <div class="card-header">
+              <h3>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Model Management
+              </h3>
+              <button class="btn btn-sm btn-primary" onclick="loadModels()">Load All Models</button>
+            </div>
+            <div class="card-body">
+              <p class="text-muted mb-2" style="font-size:13px;">
+                Download AI models to enable features. Models are stored locally and run entirely on your device.
+              </p>
+              <div class="model-download-list" id="model-status-list">
+                <div class="empty-state">
+                  <div class="spinner"></div>
+                  <p>Loading model status...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                Quick Start Guide
+              </h3>
+            </div>
+            <div class="card-body">
+              <div style="display:flex;flex-direction:column;gap:16px;">
+                <div class="analysis-item">
+                  <span style="font-size:20px;">1️⃣</span>
+                  <div>
+                    <div class="label">Step 1</div>
+                    <div class="value">Download the required AI models above</div>
+                  </div>
+                </div>
+                <div class="analysis-item">
+                  <span style="font-size:20px;">2️⃣</span>
+                  <div>
+                    <div class="label">Step 2</div>
+                    <div class="value">Click "Load All Models" to initialize them</div>
+                  </div>
+                </div>
+                <div class="analysis-item">
+                  <span style="font-size:20px;">3️⃣</span>
+                  <div>
+                    <div class="label">Step 3</div>
+                    <div class="value">Navigate to Detection, Enhancement, or OCR tabs</div>
+                  </div>
+                </div>
+                <div class="analysis-item">
+                  <span style="font-size:20px;">4️⃣</span>
+                  <div>
+                    <div class="label">Step 4</div>
+                    <div class="value">Upload images or start your webcam for live detection</div>
+                  </div>
+                </div>
+                <div class="analysis-item">
+                  <span style="font-size:20px;">✨</span>
+                  <div>
+                    <div class="label">NPU Acceleration</div>
+                    <div class="value">If running on Snapdragon, NPU is auto-detected for maximum performance</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.tabs-container -->
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         Footer
+         ═══════════════════════════════════════════════════════════════════ -->
+    <footer class="footer">
+      <div class="footer-links">
+        <a href="https://github.com" target="_blank">GitHub</a>
+        <a href="https://www.qualcomm.com/snapdragon/ai-lab" target="_blank">Qualcomm AI Hub</a>
+        <a href="https://onnxruntime.ai" target="_blank">ONNX Runtime</a>
+      </div>
+      <p>
+        NeuroLens AI — Built for the Snapdragon® AI Lab Build & Present Challenge<br/>
+        <span style="opacity:0.6;">Powered by Snapdragon NPU × ONNX Runtime × Qualcomm AI Hub</span>
+      </p>
+    </footer>
+
+  </div><!-- /.app-container -->
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- App Script -->
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
